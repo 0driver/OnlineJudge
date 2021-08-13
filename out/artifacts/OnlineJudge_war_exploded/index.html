@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>软件工程概论 OnlineJudge</title>
+    <script src="resources/jquery/jquery-3.5.1.min.js"></script>
+    <script src="resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="resources/js/myscript.js"></script>
+    <link rel="stylesheet" href="resources/bootstrap-3.3.7/css/bootstrap.css">
+    <style>
+        td {
+            cursor:default ;
+            /*禁止文字被鼠标选中*/
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    选择题&emsp;&emsp;
+    <a class="btn btn-default" href="tf.html">判断题</a>&emsp;&emsp;
+    <a class="btn btn-default" href="#" id="showAnswer">显示/隐藏答案</a>&emsp;&emsp;
+    <a class="btn btn-default" href="#" id="order">乱序/顺序</a>&emsp;&emsp;
+</h1>
+<div class="table-responsive">
+    <table class="table" border="1">
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+    <script>
+        let array = new Array();
+        let ansFlag = true;
+        let orderFlag = true;
+        window.onload = function() {
+           getData();
+        }
+        $("#showAnswer").click(function() {
+            ansFlag = !ansFlag;
+            $("#tableBody").empty();
+            getData();
+        });
+        $("#order").click(function() {
+            orderFlag = !orderFlag;
+            $("#tableBody").empty();
+            getData();
+        });
+        function getData() {
+            array.length = 0;
+            $.ajax({
+                type:'post',
+                url: "choose.txt",
+                success: function(data) {
+                    var arr = data.split("\n");
+                    for (let i = 0; i < arr.length; i += 5) {
+                        let obj = {};
+                        obj.p = arr[i];
+                        if (ansFlag) {
+                            obj.p = obj.p.replace(new RegExp('\([A-D]\)',"gm"), '&emsp;');
+                        }
+                        obj.a = arr[i + 1];
+                        obj.b = arr[i + 2];
+                        obj.c = arr[i + 3];
+                        obj.d = arr[i + 4];
+                        let temp = arr[i].match('\([A-D]\)');
+                        if (temp != null) {
+                            obj.ans = arr[i + (temp[0].charCodeAt(0) - 65 + 1)];
+                        }
+                        array.push(obj);
+                    }
+                    showData();
+                },
+                error: function(data) {
+                    alert('error');
+                }
+            });
+        }
+        function showData() {
+            if (!orderFlag) {
+                randomOrder(array);
+            }
+            for (let i = 0; i < array.length; i++) {
+                let problemRow = document.createElement("tr");
+                let optionsRow = document.createElement("tr");
+                let problem = document.createElement("th");
+                let optionsA = document.createElement("td");
+                let optionsB = document.createElement("td");
+                let optionsC = document.createElement("td");
+                let optionsD = document.createElement("td");
+                problem.innerHTML = (i + 1) + "、" + array[i].p;
+                optionsA.innerHTML = 'A.' + array[i].a;
+                optionsB.innerHTML = 'B.' + array[i].b;
+                optionsC.innerHTML = 'C.' + array[i].c;
+                optionsD.innerHTML = 'D.' + array[i].d;
+                problemRow.appendChild(problem);
+                problemRow.setAttribute("class", "active");
+                optionsRow.appendChild(optionsA);
+                optionsRow.appendChild(optionsB);
+                optionsRow.appendChild(optionsC);
+                optionsRow.appendChild(optionsD);
+                // 合并列
+                problem.colSpan = 4;
+                tableBody.appendChild(problemRow);
+                tableBody.appendChild(optionsRow);
+                optionsA.onclick = function () {
+                    checkAnaser(this, array[i]);
+                };
+                optionsB.onclick = function () {
+                    checkAnaser(this, array[i]);
+                };
+                optionsC.onclick = function () {
+                    checkAnaser(this, array[i]);
+                };
+                optionsD.onclick = function () {
+                    checkAnaser(this, array[i]);
+                };
+            }
+        }
+
+        function checkAnaser(obj1, obj2) {
+            if (obj1.innerHTML.substring(2).trim() !==  obj2.ans.trim()) {
+                obj1.style.background = 'red';
+            } else {
+                obj1.style.background = 'green';
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

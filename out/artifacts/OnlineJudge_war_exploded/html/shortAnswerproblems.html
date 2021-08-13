@@ -1,0 +1,1208 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>简答题</title>
+    <script src="../resources/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../resources/bootstrap-3.3.7/css/bootstrap.css">
+    <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+        tab-size: 4;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        overflow-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:last-child {
+        margin-bottom: 0.5rem;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+        image-orientation: from-image;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    p {
+        line-height: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 4;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror-linenumber {
+        user-select: none;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+            font-variant-ligatures: no-common-ligatures;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        .is-mac table {
+            break-inside: avoid;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    #write.first-line-indent p > .md-image:only-child:not(.md-img-error) img {
+        left: -2em;
+        position: relative;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        overflow-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none 0s ease 0s;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="flow"] svg, [lang="mermaid"] svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+    svg[id^="mermaidChart"] {
+        line-height: 1em;
+    }
+
+    mark {
+        background: rgb(255, 255, 0);
+        color: rgb(0, 0, 0);
+    }
+
+    .md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong {
+        color: inherit;
+    }
+
+    mark .md-meta {
+        color: rgb(0, 0, 0);
+        opacity: 0.3 !important;
+    }
+
+
+    :root {
+        --side-bar-bg-color: #fafafa;
+        --control-text-color: #777;
+    }
+
+    @include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+    /* open-sans-regular - latin-ext_latin */
+    /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(51, 51, 51);
+        line-height: 1.6;
+    }
+
+    #write {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 30px;
+        padding-bottom: 100px;
+    }
+
+    @media only screen and (min-width: 1400px) {
+        #write {
+            max-width: 1024px;
+        }
+    }
+
+    @media only screen and (min-width: 1800px) {
+        #write {
+            max-width: 1200px;
+        }
+    }
+
+    #write > ul:first-child,
+    #write > ol:first-child {
+        margin-top: 30px;
+    }
+
+    a {
+        color: #4183C4;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        line-height: 1.4;
+        cursor: text;
+    }
+
+    h1:hover a.anchor,
+    h2:hover a.anchor,
+    h3:hover a.anchor,
+    h4:hover a.anchor,
+    h5:hover a.anchor,
+    h6:hover a.anchor {
+        text-decoration: none;
+    }
+
+    h1 tt,
+    h1 code {
+        font-size: inherit;
+    }
+
+    h2 tt,
+    h2 code {
+        font-size: inherit;
+    }
+
+    h3 tt,
+    h3 code {
+        font-size: inherit;
+    }
+
+    h4 tt,
+    h4 code {
+        font-size: inherit;
+    }
+
+    h5 tt,
+    h5 code {
+        font-size: inherit;
+    }
+
+    h6 tt,
+    h6 code {
+        font-size: inherit;
+    }
+
+    h1 {
+        padding-bottom: .3em;
+        font-size: 2.25em;
+        line-height: 1.2;
+        border-bottom: 1px solid #eee;
+    }
+
+    h2 {
+        padding-bottom: .3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid #eee;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        line-height: 1.43;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    h6 {
+        font-size: 1em;
+        color: #777;
+    }
+
+    p,
+    blockquote,
+    ul,
+    ol,
+    dl,
+    table {
+        margin: 0.8em 0;
+    }
+
+    li > ol,
+    li > ul {
+        margin: 0 0;
+    }
+
+    hr {
+        height: 2px;
+        padding: 0;
+        margin: 16px 0;
+        background-color: #e7e7e7;
+        border: 0 none;
+        overflow: hidden;
+        box-sizing: content-box;
+    }
+
+    li p.first {
+        display: inline-block;
+    }
+
+    ul,
+    ol {
+        padding-left: 30px;
+    }
+
+    ul:first-child,
+    ol:first-child {
+        margin-top: 0;
+    }
+
+    ul:last-child,
+    ol:last-child {
+        margin-bottom: 0;
+    }
+
+    blockquote {
+        border-left: 4px solid #dfe2e5;
+        padding: 0 15px;
+        color: #777777;
+    }
+
+    blockquote blockquote {
+        padding-right: 0;
+    }
+
+    table {
+        padding: 0;
+        word-break: initial;
+    }
+
+    table tr {
+        border-top: 1px solid #dfe2e5;
+        margin: 0;
+        padding: 0;
+    }
+
+    table tr:nth-child(2n),
+    thead {
+        background-color: #f8f8f8;
+    }
+
+    table tr th {
+        font-weight: bold;
+        border: 1px solid #dfe2e5;
+        border-bottom: 0;
+        margin: 0;
+        padding: 6px 13px;
+    }
+
+    table tr td {
+        border: 1px solid #dfe2e5;
+        margin: 0;
+        padding: 6px 13px;
+    }
+
+    table tr th:first-child,
+    table tr td:first-child {
+        margin-top: 0;
+    }
+
+    table tr th:last-child,
+    table tr td:last-child {
+        margin-bottom: 0;
+    }
+
+    .CodeMirror-lines {
+        padding-left: 4px;
+    }
+
+    .code-tooltip {
+        box-shadow: 0 1px 1px 0 rgba(0, 28, 36, .3);
+        border-top: 1px solid #eef2f2;
+    }
+
+    .md-fences,
+    code,
+    tt {
+        border: 1px solid #e7eaed;
+        background-color: #f8f8f8;
+        border-radius: 3px;
+        padding: 0;
+        padding: 2px 4px 0px 4px;
+        font-size: 0.9em;
+    }
+
+    code {
+        background-color: #f3f4f4;
+        padding: 0 2px 0 2px;
+    }
+
+    .md-fences {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        padding-top: 8px;
+        padding-bottom: 6px;
+    }
+
+
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+    }
+
+    @media print {
+        html {
+            font-size: 13px;
+        }
+
+        table,
+        pre {
+            page-break-inside: avoid;
+        }
+
+        pre {
+            word-wrap: break-word;
+        }
+    }
+
+    .md-fences {
+        background-color: #f8f8f8;
+    }
+
+    #write pre.md-meta-block {
+        padding: 1rem;
+        font-size: 85%;
+        line-height: 1.45;
+        background-color: #f7f7f7;
+        border: 0;
+        border-radius: 3px;
+        color: #777777;
+        margin-top: 0 !important;
+    }
+
+    .mathjax-block > .code-tooltip {
+        bottom: .375rem;
+    }
+
+    .md-mathjax-midline {
+        background: #fafafa;
+    }
+
+    #write > h3.md-focus:before {
+        left: -1.5625rem;
+        top: .375rem;
+    }
+
+    #write > h4.md-focus:before {
+        left: -1.5625rem;
+        top: .285714286rem;
+    }
+
+    #write > h5.md-focus:before {
+        left: -1.5625rem;
+        top: .285714286rem;
+    }
+
+    #write > h6.md-focus:before {
+        left: -1.5625rem;
+        top: .285714286rem;
+    }
+
+    .md-image > .md-meta {
+        /*border: 1px solid #ddd;*/
+        border-radius: 3px;
+        padding: 2px 0px 0px 4px;
+        font-size: 0.9em;
+        color: inherit;
+    }
+
+    .md-tag {
+        color: #a7a7a7;
+        opacity: 1;
+    }
+
+    .md-toc {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .sidebar-tabs {
+        border-bottom: none;
+    }
+
+    #typora-quick-open {
+        border: 1px solid #ddd;
+        background-color: #f8f8f8;
+    }
+
+    #typora-quick-open-item {
+        background-color: #FAFAFA;
+        border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    /** focus mode */
+    .on-focus-mode blockquote {
+        border-left-color: rgba(85, 85, 85, 0.12);
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "Segoe UI", "Arial", sans-serif;
+    }
+
+    .file-node-content:hover .file-node-icon,
+    .file-node-content:hover .file-node-open-state {
+        visibility: visible;
+    }
+
+    .mac-seamless-mode #typora-sidebar {
+        background-color: #fafafa;
+        background-color: var(--side-bar-bg-color);
+    }
+
+    .md-lang {
+        color: #b4654d;
+    }
+
+    .html-for-mac .context-menu {
+        --item-hover-bg-color: #E6F0FE;
+    }
+
+    #md-notification .btn {
+        border: 0;
+    }
+
+    .dropdown-menu .divider {
+        border-color: #e5e5e5;
+    }
+
+    .ty-preferences .window-content {
+        background-color: #fafafa;
+    }
+
+    .ty-preferences .nav-group-item.active {
+        color: white;
+        background: #999;
+    }
+
+
+    </style>
+</head>
+<body class='typora-export os-windows'>
+<h1>简答题&emsp;&emsp;<a class="btn btn-default" href="index.html">选择题</a>&emsp;&emsp;<a class="btn btn-default" href="fillProblem.html">填空题</a>&emsp;&emsp;<a class="btn btn-default" href="knowledgePoints.html">知识点</a></h1>
+<div  id='write'  class = ''><h4><a name="简述模型的作用" class="md-header-anchor"></a><span>简述模型的作用</span></h4><p><span>答：现实系统的复杂性和内隐性，使得人们难于直接认识和把握，为了使得人们能够直观和明了地认识和把握现实系统，就需要借助于模型。 </span></p><h4><a name="软件模型有什么特征" class="md-header-anchor"></a><span>软件模型有什么特征</span></h4><p><span>答：建模对象特殊，复杂性，多样性 </span></p><h4><a name="软件建模技术有哪些因素" class="md-header-anchor"></a><span>软件建模技术有哪些因素</span></h4><p><span>答：软件建模方法，软件建模过程，软件建模语言，软件建模工具 </span></p><h4><a name="软件模型包括哪些方面的内容" class="md-header-anchor"></a><span>软件模型包括哪些方面的内容</span></h4><p><span>答：从模型所反映的侧面看：功能模型，非功能模型，数据模型，对象模型，过程模型，状态模型，交互模型，架构模型，界面模型等；从软件开发工作看：业务模型，需求模型，分析模型，设计模型，测试模型等。 </span></p><h4><a name="软件建模工具应该具有哪些基本功能" class="md-header-anchor"></a><span>软件建模工具应该具有哪些基本功能</span></h4><p><span>答：软件模型的生成和编辑，软件模型的质量保障，软件模型管理等 </span></p><h4><a name="简述uml的发展过程" class="md-header-anchor"></a><span>简述UML的发展过程</span></h4><p><span>答：Rational公司在众多软件开发方法的基础上于1996年提出了UML0.9版本，1997年把UML1.0版本提交给OMG，1997年被OMG正式批准成为标准，1998年UML1.2 版，1999年UML1.3版，2001年1.4版本，2003年1.5版本，2005年2.0版本，2009年2.2版本，2010年2.3版本，现在已经上升为2.4版本。</span></p><h4><a name="作为一种统一建模语言uml有哪些部分构成" class="md-header-anchor"></a><span>作为一种统一建模语言，UML有哪些部分构成</span></h4><p><span>答：UML由模型元素、图、语义规则和公共机制及部分构成</span></p><h4><a name="元模型理论是uml的基础元模型分为哪4个层次" class="md-header-anchor"></a><span>元模型理论是UML的基础，元模型分为哪4个层次</span></h4><p><span>答：元元模型、元模型、模型、对象</span></p><h4><a name="聚集关系和组合关系有什么区别" class="md-header-anchor"></a><span>聚集关系和组合关系有什么区别</span></h4><p><span>答：聚合关系表示整体与部分之间是松散的组成关系，连接一个整体对象的另外一些部分的对象，也可以充当其他对象的部分对象；</span></p><p><span>组合关系则表示联系紧密的组成关系，整体对象和部分对象之间是同存同亡的关系，而且在组成关系中的部分对象不能和另一个整体对象再进行连接</span></p><h4><a name="用例与协作有什么区别" class="md-header-anchor"></a><span>用例与协作有什么区别</span></h4><p><span>答：协作是对用例的实现</span></p><h4><a name="模型元素的可见性含义是什么" class="md-header-anchor"></a><span>模型元素的可见性含义是什么 </span></h4><p><span> 答：模型元素可被其他模型元素访问的程度，共分为公用，受限，私有，包四种。</span></p><h4><a name="uml的构造型有什么作用" class="md-header-anchor"></a><span>UML的构造型有什么作用 </span></h4><p><span>答：给UML定义的模型元素赋予新的含义，定义新的模型符号，改换模型元素的表示形式。</span></p><h4><a name="什么叫参与者参与者有哪些基本特性" class="md-header-anchor"></a><span>什么叫参与者，参与者有哪些基本特性</span></h4><p><span>答：参与者也被称为活动者，是与系统发生交互的外部实体。参与者的特性有：</span></p><p><span>（1）参与者位于系统的外部，不属于系统的内容；</span></p><p><span>（2）参与者与系统发生交互关系，交互关系主要有：使用系统，启动系统，获取系统信息或给系统提供信息；</span></p><p><span>（3）参与者和系统之间存在交互信息的接口，系统提供接口让参与者使用系统，或者系统通过参与者的接口与参与者进行交互。 </span></p><h4><a name="用例有哪些特性" class="md-header-anchor"></a><span>用例有哪些特性</span></h4><p><span>答：概括起来，用例有以下特性： </span></p><p><span>（1）用例描述用户对系统的期望，被用于软件需求建模，一个用例对应于软件能够为参与者提供的一项服务。 </span></p><p><span>（2）用例反映参与者与系统一次完整的交互过程。这个交互过程总是要耗费一段时间，并执行一定的流程。流程的执行是参与者与系统的一段互动过程，在这个过程中有输入到系统的信息，以及系统反馈给参与者的信息。 </span></p><p><span>（3）用例的执行过程是系统为参与者的一次服务过程，这个服务就体现为系统提供给参与者的功能。一个用例执行的完成，需要有确定的评价结果，这个结果表现为系统提供给参与者的一项完整的功能。 </span></p><p><span>（4）用例是软件设计和测试的依据。 </span></p><h4><a name="用例之间有哪几种关系" class="md-header-anchor"></a><span>用例之间有哪几种关系</span></h4><p><span> 答：泛化关系，包含关系，扩展关系。 </span></p><h4><a name="用例叙述应该包括哪些基本内容" class="md-header-anchor"></a><span>用例叙述应该包括哪些基本内容 </span></h4><p><span> 答：包括：用例编号，用例名，参与者，前置条件，事件流，后置条件。</span></p><h4><a name="什么叫对象" class="md-header-anchor"></a><span>什么叫对象</span></h4><p><span> 答：对象的本意是指认识的指向物。在计算机软件中，对象用来表示客观事物的一个实体，它封装了一组属性和操作。从形式上看，对象是一段具有特定语法规则的程序单元，它能够作为软件系统的一个相对独立的基本单位，在软件中承担确定的服务职能。 </span></p><h4><a name="简述实例的概念" class="md-header-anchor"></a><span>简述实例的概念</span></h4><p><span> 答：实例是类元中的一个元素。 </span></p><h4><a name="简述类元的概念" class="md-header-anchor"></a><span>简述类元的概念</span></h4><p><span> 答：类元是对聚集一组具有共同特征的实例的模型元素的通称，类、接口、用例、参与者、关联等都属于类元。类元的名字用标识符来表示，首字母要大写。类元会包括一组实例。 </span></p><h4><a name="什么叫类" class="md-header-anchor"></a><span>什么叫类</span></h4><p><span>答：类是具有相同性质的一组对象的集合，这组对象具有相同的特征、约束和语义。 </span></p><h4><a name="类有哪几种类型" class="md-header-anchor"></a><span>类有哪几种类型</span></h4><p><span> 答：按阶段分：业务对象，PIM类，PSM类；按作用分：实体类，控制类，界面类。 </span></p><h4><a name="简述接口的概念" class="md-header-anchor"></a><span>简述接口的概念 </span></h4><p><span> 答：接口是一种类元，聚集了一组需要通过其他类元实现的公共的操作和属性</span></p><h4><a name="什么叫包" class="md-header-anchor"></a><span>什么叫包</span></h4><p><span>答：包是对模型元素进行分组的模型元素，可以把包比作一个存放模型元素的箱子或容器，在它里面可以存放多个模型元素。 </span></p><h4><a name="包之间存在哪几种关系" class="md-header-anchor"></a><span>包之间存在哪几种关系</span></h4><p><span>答：依赖，导入，合并，包含 </span></p><h4><a name="包图有什么作用" class="md-header-anchor"></a><span>包图有什么作用</span></h4><p><span> 答：分类组织模型元素，模型结构建模，命名空间建模 </span></p><h4><a name="在软件建模中复合结构图有什么作用" class="md-header-anchor"></a><span>在软件建模中，复合结构图有什么作用</span></h4><p><span> 答：可以直观反映类及其成员的组成结构，并可以描述成员的多重性，成员的连接，以及类的端口等 </span></p><h4><a name="协作在建模中的作用是什么" class="md-header-anchor"></a><span>协作在建模中的作用是什么 </span></h4><p><span> 答：用例分析与设计建模，设计模式建模</span></p><h4><a name="活动的含义是什么" class="md-header-anchor"></a><span>活动的含义是什么 </span></h4><p><span> 答：活动的一般含义是指在过程中能够完成确定任务的一组相关动作的集合。 </span></p><h4><a name="动作与活动存在什么关系" class="md-header-anchor"></a><span>动作与活动存在什么关系</span></h4><p><span>答：动作是活动的一个基本执行单位，若干个动作按照一定的流程联系起来，就构成一个活动。活动可以分解为多个动作，但动作一般不再分解。 </span></p><h4><a name="什么叫令牌它有什么作用" class="md-header-anchor"></a><span>什么叫令牌？它有什么作用</span></h4><p><span>答：令牌被定义为一个可以赋予结点执行权力的数据结构，这个数据结构可以在活动图的各个结点之间进行传递，一个结点只有获得令牌才可以执行。  </span></p><h4><a name="什么叫引脚" class="md-header-anchor"></a><span>什么叫引脚</span></h4><p><span> 答：引脚是用来作为动作参数的对象结点，因此引脚也被称为动作参数结点。因为在动作的两边通过小插脚来表示动作参数结点，这种小插脚和集成电路芯片的引脚很相像，因此被称为引脚。 </span></p><h4><a name="活动图的作用是什么" class="md-header-anchor"></a><span>活动图的作用是什么</span></h4><p><span> 答：在软件建模中，活动图可以用于业务流程、工作流和算法流程建模。</span></p><h4><a name="什么是状态对象的状态和对象的属性有什么区别" class="md-header-anchor"></a><span>什么是状态，对象的状态和对象的属性有什么区别</span></h4><p><span>答：状态指事物在其生命周期中满足某些条件、执行某些操作或等待某些事件而持续的一种稳定的状况。对象的属性是对象所表示事物的静态性质，它与对象的状态有不同的含义。 </span></p><h4><a name="状态机图通常由哪几部分组成状态转换的要素有哪些" class="md-header-anchor"></a><span>状态机图通常由哪几部分组成？状态转换的要素有哪些？ </span></h4><p><span>答：状态机图由状态结点，控制结点和转换边构成。状态转换有触发条件、监护条件和转换动作等部分。 </span></p><h4><a name="复合状态的状态转换的外部转换和局部转换的区别是什么请举例说明" class="md-header-anchor"></a><span>复合状态的状态转换的外部转换和局部转换的区别是什么？请举例说明</span></h4><p><span>答：外部转换是复合状态与其他状态之间发生的状态转换，内部转换是在复合状态内部的子状态之间发生的转换。例子省略。 </span></p><h4><a name="历史状态的含义是什么" class="md-header-anchor"></a><span>历史状态的含义是什么</span></h4><p><span>答：历史状态为一个状态机或复合状态提供了一种在退出状态时记忆当前活动所处的子状态，并能够返回到该子状态的机制。</span></p><h4><a name="什么叫交互" class="md-header-anchor"></a><span>什么叫交互？ </span></h4><p><span> 答：交互表示一组相关的对象在动作执行中，通过相互交互消息，完成确定的任务。 </span></p><h4><a name="什么叫生命线" class="md-header-anchor"></a><span>什么叫生命线？ </span></h4><p><span>答：生命线表示参与交互的一个实体及实体集合。一条生命线表示为一个矩形框下面垂着一条虚线。 </span></p><h4><a name="消息有哪几种类型" class="md-header-anchor"></a><span>消息有哪几种类型？ </span></h4><p><span> 答：同步调用消息，异步调用消息，异步信号，应答消息，创建消息，销毁消息。 </span></p><h4><a name="交互图有哪几种形式" class="md-header-anchor"></a><span>交互图有哪几种形式？ </span></h4><p><span>答：顺序图，通信图，交互概览图，时序图。  </span></p><h4><a name="简述交互概览图的概念和作用" class="md-header-anchor"></a><span>简述交互概览图的概念和作用。 </span></h4><p><span> 答：交互概览图是把顺序图和活动图结合起来描述交互流程和交互细节的一种交互图。其作用是用来对复杂的交互流程和细节进行建模。  </span></p><h4><a name="交互概览图有哪两种类型" class="md-header-anchor"></a><span>交互概览图有哪两种类型？ </span></h4><p><span> 答：以活动图为主线，以顺序图为主线  </span></p><h4><a name="什么叫时序图" class="md-header-anchor"></a><span>什么叫时序图？ </span></h4><p><span> 答：时序图用来描述在一个交互中，参与交互的各对象实体状态变化的时序关系。</span></p><h4><a name="什么叫构件" class="md-header-anchor"></a><span>什么叫构件？ </span></h4><p><span> 答：构件也称为组件，是被封装起来的软件逻辑部件，由这些逻辑部件可以构成完整的软件系统。 </span></p><h4><a name="构件有哪些特性" class="md-header-anchor"></a><span>构件有哪些特性？ </span></h4><p><span>答：封装性，复用性，接口连接机制，自含性，可替换性，松耦合性，逻辑性 </span></p><h4><a name="构件有哪两种视图" class="md-header-anchor"></a><span>构件有哪两种视图？  </span></h4><p><span>答：外边视图，内部视图 </span></p><h4><a name="构件之间存在哪些关系" class="md-header-anchor"></a><span>构件之间存在哪些关系？  </span></h4><p><span>答：依赖关系和包含关系</span></p><h4><a name="什么叫软件部署" class="md-header-anchor"></a><span>什么叫软件部署？ </span></h4><p><span> 答：软件运行环境的配置以及软件向各个结点的部署的工作被称为软件部署 </span></p><h4><a name="什么叫制品" class="md-header-anchor"></a><span>什么叫制品？ </span></h4><p><span>答：制品指制成的工件。在UML中，制品是一种模型元素，表示可以在结点上独立部署的软件单元。制品一般以文件的形式呈现，例如，模型文件、源文件、编译文件、执行文件、脚本文件、数据库表等。 </span></p><h4><a name="结点有哪两种基本类型" class="md-header-anchor"></a><span>结点有哪两种基本类型？  </span></h4><p><span>答：设备，执行环境 </span></p><h4><a name="简述部署规范的概念" class="md-header-anchor"></a><span>简述部署规范的概念。 </span></h4><p><span> 答：部署规范也被称为部署说明，是存放部署制品所依据的参量信息的一种特殊制品。部署规范作为一种制品，一般作为文件的形式存在</span></p></div>
+</body>
+</html>

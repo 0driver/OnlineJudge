@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AddChoiceProblems</title>
+    <script src="../resources/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../resources/bootstrap-3.3.7/css/bootstrap.css">
+</head>
+<body>
+    <div class="col-md-5">
+        <form id="choiceProblemFrom" role="form">
+            <fieldset>
+                <legend>录入题目</legend>
+                <div class="form-group">
+                    <textarea rows="3" type="text" class="form-control" name="problem" placeholder="problem"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="optionsA" placeholder="optionsA">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="optionsB" placeholder="optionsB">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="optionsC" placeholder="optionsC">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="optionsD" placeholder="optionsD">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="answer" placeholder="answer">
+                </div>
+            </fieldset>
+            <button id="addChoiceProblemButton" type="submit" class="btn btn-block btn-info">添加</button>
+        </form>
+    </div>
+    <script>
+        $('#addChoiceProblemButton').click(function () {
+            $.ajax({
+                url:'/AddChoiceProblemServlet',
+                type: 'POST',
+                data:$('#choiceProblemFrom').serialize()
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UML OnlineJudge</title>
+    <script src="../resources/jquery/jquery-3.5.1.min.js"></script>
+    <script src="../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../resources/bootstrap-3.3.7/css/bootstrap.css">
+    <style>
+        span {
+            /*让一个元素具有“区块元素”的属性（可以设置width和height），又具有“内联元素”的属性（不产生换行）*/
+            display:inline-block;
+            min-width:100px;
+            min-height:20px;
+            border:none;
+            border-bottom: 1px solid #000;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<h1>填空题&emsp;&emsp;<a class="btn btn-default" href="index.html">选择题</a>&emsp;&emsp;<a class="btn btn-default" href="shortAnswerproblems.html">简答题</a>&emsp;&emsp;<a class="btn btn-default" href="knowledgePoints.html">知识点</a></h1>
+<h4><p>说明：填空题的判断依据为文字匹配，说法不同导致误判是正常情况。</p></h4>
+<div class="table-responsive">
+    <table class="table" border="1">
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+    <button id="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+    <script>
+        let array = new Array();
+        window.onload = function() {
+            $.ajax({
+                url: '/GetFillProblemServlet',
+                type: 'POST',
+                success: function (data) {
+                    let jsonData = JSON.parse(data);
+                    let problemList = jsonData.fillProblemList;
+                    let tableBody = document.getElementById('tableBody');
+                    let len = problemList.length;
+                    for (let i = 0; i < len; i++) {
+                        let row = document.createElement("tr");
+                        let col = document.createElement("td");
+                        // 通过正则表达式将空全部替换成input输入框
+                        col.innerHTML = (i + 1) + "、" +problemList[i].replace(/（.*?）/g,'<span class="input" contenteditable="true"></span>');
+                        // 获取正则表达式匹配的各个值
+                        let tempArray = problemList[i].match(/（.*?）/g);
+                        for (let j = 0; j < tempArray.length; j++) {
+                            array.push(tempArray[j].substring(1,tempArray[j].length - 1));
+                        }
+                        row.appendChild(col);
+                        tableBody.appendChild(row);
+                    }
+                }
+            });
+        }
+        $('#submit').click(function () {
+            let input = document.getElementsByClassName('input');
+            for (let i = 0; i < input.length; i++) {
+                if (input[i].innerHTML !== array[i]) {
+                    input[i].style.color = 'red';
+                    input[i].innerHTML = '<del style="color:black; text-decoration:line-through;">'+ input[i].innerHTML + '</del> ' + array[i];
+                } else {
+                    input[i].style.color = 'green';
+                }
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
