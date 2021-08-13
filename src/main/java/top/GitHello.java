@@ -5,5 +5,6 @@ public class GitHello {
         System.out.println("hello idea_git!");
         System.out.println("更新");
         System.out.println("create branch");
+        System.out.println("dev add");
     }
 }
